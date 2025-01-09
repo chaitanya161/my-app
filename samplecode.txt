@@ -1,0 +1,170 @@
+Program to print Fibonacci Series using java code:
+
+import java.util.Scanner;
+
+public class FibonacciSeries {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the number of terms in Fibonacci series: ");
+        int n = scanner.nextInt();
+        
+        System.out.println("Fibonacci Series:");
+        generateFibonacci(n);
+    }
+
+    public static void generateFibonacci(int n) {
+        int first = 0, second = 1;
+        System.out.print(first + " " + second + " ");
+        for (int i = 2; i < n; i++) {
+            int next = first + second;
+            System.out.print(next + " ");
+            first = second;
+            second = next;
+        }
+    }
+}
+--------------------------------------------------------------------------------------------------
+Program to print Fibonacci Series using react code:
+
+import React, { useState } from 'react';
+
+function FibonacciSeries() {
+    const [terms, setTerms] = useState('');
+    const [fibSeries, setFibSeries] = useState([]);
+
+    const generateFibonacci = () => {
+        const n = parseInt(terms);
+        if (isNaN(n) || n <= 0) {
+            alert('Please enter a valid positive integer.');
+            return;
+        }
+
+        let first = 0, second = 1;
+        let series = [first, second];
+        for (let i = 2; i < n; i++) {
+            let next = first + second;
+            series.push(next);
+            first = second;
+            second = next;
+        }
+        setFibSeries(series);
+    };
+
+    return (
+        <div>
+            <h2>Generate Fibonacci Series</h2>
+            <label>
+                Number of Terms:
+                <input type="number" value={terms} onChange={(e) => setTerms(e.target.value)} />
+            </label>
+            <button onClick={generateFibonacci}>Generate</button>
+
+            <h3>Fibonacci Series:</h3>
+            <ul>
+                {fibSeries.map((num, index) => (
+                    <li key={index}>{num}</li>
+                ))}
+            </ul>
+        </div>
+    );
+}
+
+export default FibonacciSeries;
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------
+
+Write a class & method that would take a “string” as parameter and return the occurrences of each unique word with java 8 features
+
+import java.util.Arrays;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+public class WordCounterJava8 {
+    public static Map<String, Long> countOccurrences(String text) {
+        return Arrays.stream(text.split("\\s+"))  // Split the text into words
+                .map(word -> word.replaceAll("[^a-zA-Z]", "").toLowerCase())  // Remove non-word characters and convert to lowercase
+                .filter(word -> !word.isEmpty())  // Filter out empty strings
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));  // Count occurrences using groupingBy and counting collectors
+    }
+
+    public static void main(String[] args) {
+        String text = "This is a sample text. It contains some sample words. The words may repeat. Repeat words should be counted.";
+        Map<String, Long> occurrences = countOccurrences(text);
+        
+        // Print occurrences of each unique word
+        occurrences.forEach((word, count) -> System.out.println(word + ": " + count));
+    }
+}
+
+----------------------------------------------------------------
+
+Generate Palindrome series with java8 features
+import java.util.stream.IntStream;
+
+public class PalindromeSeries {
+    public static void main(String[] args) {
+        System.out.println("Palindrome Series:");
+        generatePalindromeSeries(10); // Generating palindrome series up to 10 numbers
+    }
+
+    public static void generatePalindromeSeries(int limit) {
+        IntStream.iterate(0, n -> n + 1)
+                .filter(n -> isPalindrome(String.valueOf(n)))
+                .limit(limit)
+                .forEach(System.out::println);
+    }
+
+    public static boolean isPalindrome(String str) {
+        int left = 0;
+        int right = str.length() - 1;
+        while (left < right) {
+            if (str.charAt(left) != str.charAt(right)) {
+                return false;
+            }
+            left++;
+            right--;
+        }
+        return true;
+    }
+}
+-------------------------------------------------------------------------------------------
+
+Swapping of 2 nos without using 3 rd variable
+
+
+import java.util.Scanner;
+
+public class SwapWithoutThirdVariable {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the first number: ");
+        int num1 = scanner.nextInt();
+        System.out.print("Enter the second number: ");
+        int num2 = scanner.nextInt();
+
+        System.out.println("Before swapping: num1 = " + num1 + ", num2 = " + num2);
+
+        // Using XOR operation
+        num1 = num1 ^ num2;
+        num2 = num1 ^ num2;
+        num1 = num1 ^ num2;
+
+        System.out.println("After swapping: num1 = " + num1 + ", num2 = " + num2);
+    }
+}
+
+
+----------------------------------------------------
+
+mysql query 2 find 3rd highest salary
+
+SELECT DISTINCT salary
+FROM employee
+ORDER BY salary DESC
+LIMIT 1 OFFSET 2;
+
+
